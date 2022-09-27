@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client'
 
 import YandexMap from "./yandex-map.js";
 import TablePpc from './tablePpc.js'
@@ -18,5 +18,4 @@ const App = () => {
 };
 
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App/>, rootElement);
+createRoot(document.getElementById('root')).render(<App/>)

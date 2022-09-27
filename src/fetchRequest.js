@@ -7,7 +7,7 @@ export function fetchRequest() {
 }
 
 export function userInfo() {
-    fetch('http://192.168.3.41:8080/api/userInfo', {
+    return fetch('http://192.168.3.41:8080/auth/userInfo', {
         method: 'POST'
     })
         .then((response) => response.json())
