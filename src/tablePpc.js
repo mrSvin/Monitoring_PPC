@@ -1,7 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {fetchRequest,userInfo} from './fetchRequest.js'
 
-function TablePpc() {
+
+
+function TablePpc({filterList, setFilterList, filter, setFilter, allDataArray, selectedPpc, setSelectedPpc}) {
+
 
     useEffect(() => {
 
@@ -9,9 +12,20 @@ function TablePpc() {
         console.log(array)
 
         let user = userInfo()
-        console.log(user)
+        // console.log(user.then(e=>{return e}))
 
     }, [])
+
+    function handleFilter(e) {
+        const {value} = e.target;
+
+        let fil = allDataArray.map(e=>{
+            return (value == e[1].slice(0, value.length)? e: null)
+        }).filter((notNull)=>{return notNull !== null})
+
+        setFilter(value)
+        setFilterList(fil)
+    }
 
     return (
         <div className="divTable ">
@@ -21,31 +35,33 @@ function TablePpc() {
                 <span className="beaconMenuButtonInside"></span>
             </div>
             <div className="searchField">
-                <input type="text" placeholder="Поиск полуприцепа..."/>
+                <input onChange={(e) => {
+                    handleFilter(e)
+                }} type="text" placeholder="Поиск полуприцепа..." value={filter} maxLength={40}/>
             </div>
 
             <table className="tableBeacon">
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th>Название</th>
-                    <th>id</th>
-
+                    <th>Имя полуприцепа</th>
+                    <th>ID</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Буклов А.В</td>
-                    <td>1234</td>
-
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Васильев А.В</td>
-                    <td>1432</td>
-
-                </tr>
+                {filterList.map((e,i)=>{
+                    return (
+                        <tr className={selectedPpc==filterList[i]? 'selectedPPC':null} key={i} onClick={(e)=>{
+                            console.log(filterList[i])
+                            setSelectedPpc(filterList[i])
+                        }}>
+                            <td>{e[0]}</td>
+                            <td>{e[1]}</td>
+                            <td>{e[2]}</td>
+                        </tr>
+                    )
+                })
+                }
                 </tbody>
             </table>
         </div>
