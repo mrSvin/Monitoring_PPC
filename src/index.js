@@ -31,7 +31,7 @@ const App = () => {
         {id: 20, name: '86h543h345h435h543h354h3h54h354h3405', wialon_id: 25655367},
     ]
 
-    async function getLocalData(){
+    function getLocalData(){
         let allDataArray = []
 
         if (localStorage['data'] == undefined) {
