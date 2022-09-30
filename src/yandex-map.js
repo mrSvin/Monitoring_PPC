@@ -2,25 +2,15 @@ import React, {useEffect} from "react";
 import {YMaps, Map, Clusterer, Placemark} from "react-yandex-maps";
 import icon from "./images/ppc.png"
 
-const YandexMap = ({placemarks, info}) => {
-
-    // async function fetchMarks() {
-    //     const requestUrl =
-    //         "https://my-json-server.typicode.com/st-iv/api-test/features";
-    //     const marks = await fetch(requestUrl);
-    //     const data = await marks.json();
-    //     return data;
-    // }
-
-    // const getBounds = () => {
-    //     setBounds(mapRef.current.getBounds().toString());
-    // };
+const YandexMap = ({placemarks, info, mapRef, idState}) => {
 
     useEffect(() => {
         //здесь происходит обращение к api с параметром bounds
-        // fetchMarks().then((data) => setPlacemarks(data));
+        //  fetchMarks().then((data) => {
+        //      console.log('setPlacemarks',data)
+        //       setPlacemarks(data[1].coords)
+        //  });
     }, []);
-
 
 
     return (
@@ -28,12 +18,11 @@ const YandexMap = ({placemarks, info}) => {
         <div className='map'>
             <YMaps>
                 <Map
-                    defaultState={{center: [55.744522, 37.616378], zoom: 8}}
+                    defaultState={{center:placemarks, zoom: 8}}
                     width="100%"
                     height="600px"
-                    // instanceRef={mapRef}
-                    // onLoad={getBounds}
-                    // onBoundsChange={getBounds}
+                    instanceRef={mapRef}
+                    type='yandex#hybrid'
                     modules={[
                         "multiRouter.MultiRoute",
                         "coordSystem.geo",
@@ -43,20 +32,27 @@ const YandexMap = ({placemarks, info}) => {
                 >
                     <Clusterer
                         options={{
-                            preset: "islands#invertedVioletClusterIcons",
-                            groupByCoordinates: false
+                            clusterIconLayout: "default#pieChart",
+                            clusterIconPieChartRadius: 25,
+                            clusterIconPieChartCoreRadius: 10,
+                            clusterIconPieChartStrokeWidth: 1,
+                            clusterDisableClickZoom: true,
+                            clusterHideIconOnBalloonOpen: false,
+                            geoObjectHideIconOnBalloonOpen: false
                         }}
                     >
                         <Placemark
-                            key={0}
+                            key={idState}
                             geometry={placemarks}
                             properties={{
-                                balloonContentBody: info
+                                balloonContentBody: `<b>Имя</b>: ${info[2]}<br>
+                                                         <b>Координаты</b>: ${info[1]} - ${info[0]}<br>
+                                                         <b>Напряжение</b>: ${info[3]}`
                             }}
                             options={{
                                 iconLayout: "default#image",
                                 iconImageHref: icon,
-
+                                iconImageSize: [70, 60],
                             }}
                         />
 
