@@ -51,6 +51,9 @@ export function fetchRequestObject(id) {
         .then((data) => {
             return data
         })
+        .catch((error)=>{
+            console.log('Ошибка', error)
+        })
 }
 
 export function userInfo() {

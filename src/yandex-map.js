@@ -42,6 +42,7 @@ const YandexMap = ({placemarks, info, mapRef, idState}) => {
                         }}
                     >
                         <Placemark
+                            className = 'letRotate'
                             key={idState}
                             geometry={placemarks}
                             properties={{

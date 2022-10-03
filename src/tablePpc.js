@@ -1,9 +1,12 @@
 import {fetchRequestObject} from './fetchRequest.js'
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 function TablePpc({filterList, setFilterList, filter, setFilter,
                       setPlacemarks, mapRef,idState, setIdState,
                       getLocalData, setInfo}) {
+
+    const [tableClicked, setTableClicked] = useState(true)
+    const [errorMessage, setErrorMessage] = useState(false)
 
     useEffect(() => {
 
@@ -27,6 +30,33 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                     let scroll = document.getElementsByClassName('selectedPPC')[0]
                     scroll.scrollIntoView({block: "center", behavior: "smooth"});
                 })
+                    .catch(error=>{
+                        setTimeout(() => {
+                            console.log('Ошибка повторная загрузка', )
+                            let promiseError = fetchRequestObject(localStorage['selectedPPC'])
+                            promiseError.then(e=>{
+                                if(!e.pos){
+                                    alert('Не удалось загрузить станок')
+                                    return 0
+                                }
+                                // записать координаты в массив
+                                let array = [e.pos.y, e.pos.x]
+                                let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext]
+                                // Переместить карту в эти координаты
+                                mapRef.current.panTo(array, {
+                                    delay: 1000
+                                });
+
+                                // Установить координаты точки и обновить ключ
+                                setInfo(message)
+                                setPlacemarks(array)
+                                setIdState(idState+1)
+
+                                let scroll = document.getElementsByClassName('selectedPPC')[0]
+                                scroll.scrollIntoView({block: "center", behavior: "smooth"});
+                            })
+                        },2000)
+                    })
             }
             else if(localStorage['data'] !== undefined)
             {
@@ -47,6 +77,33 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                     setPlacemarks(array)
                     setIdState(idState+1)
                 })
+                    .catch(error=>{
+                        setTimeout(() => {
+                            console.log('Ошибка повторная загрузка', )
+                            let promiseError = fetchRequestObject(localStorage['selectedPPC'])
+                            promiseError.then(e=>{
+                                // записать координаты в массив
+                                if(!e.pos){
+                                    alert('Не удалось загрузить станок')
+                                    return 0
+                                }
+                                let array = [e.pos.y, e.pos.x]
+                                let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext]
+                                // Переместить карту в эти координаты
+                                mapRef.current.panTo(array, {
+                                    delay: 1000
+                                });
+
+                                // Установить координаты точки и обновить ключ
+                                setInfo(message)
+                                setPlacemarks(array)
+                                setIdState(idState+1)
+
+                                let scroll = document.getElementsByClassName('selectedPPC')[0]
+                                scroll.scrollIntoView({block: "center", behavior: "smooth"});
+                            })
+                        },2000)
+                    })
             }
 
         }, 1000)
@@ -81,7 +138,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                 }} type="text" placeholder="Поиск полуприцепа..." value={filter} maxLength={40}/>
             </div>
 
-            <table className="tableBeacon">
+            <table className={tableClicked? "tableBeacon": "tableBeacon tableNoPointer"}>
                 <thead>
                 <tr>
                     <th>№</th>
@@ -95,28 +152,50 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                         <tr
                             className={localStorage['selectedPPC']==filterList[i][2]? 'selectedPPC':null}
                             key={i}
-                            onClick={()=>{
+                            onClick={(e)=>{
+                                // let table = document.querySelector('.tableBeacon')
+
+                                setTableClicked(false)
+                                // e.target.classList.add('loadingPPC');
+                                // e.target.classList.add('tableNoPointer');
+
+                                setTimeout(()=>{
+                                    // e.target.classList.remove('loadingPPC');
+                                    setTableClicked(true)
+                                }, 1000)
 
                                 // получить координаты ппц
                                 let promise = fetchRequestObject(filterList[i][2])
 
                                 localStorage['selectedPPC'] = filterList[i][2]
-                                promise.then(e=>{
-                                    // записать координаты в массив
-                                    let array = [e.pos.y, e.pos.x]
-                                    let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext]
+                                promise.then(p=>{
 
+                                    // записать координаты в массив
+                                    let array = [p.pos.y, p.pos.x]
+                                    let message = [p.pos.y, p.pos.x, p.nm, p.lmsg.p.pwr_ext]
+
+                                    setIdState(idState+1)
+                                    setInfo(message)
+                                    setPlacemarks(array)
 
                                     // Переместить карту в эти координаты
                                     mapRef.current.panTo(array, {
                                         delay: 1000
                                     });
 
-                                    // Установить координаты точки и обновить ключ
-                                    setInfo(message)
-                                    setPlacemarks(array)
-                                    setIdState(idState+1)
+
+
+                                    if(e.target.querySelectorAll('td')[1].innerHTML == 'Не удалось инициализировать полуприцеп'){
+                                        e.target.querySelectorAll('td')[1].innerHTML = p.nm
+                                    }
+
                                 })
+                                    .catch(error=>{
+                                        e.target.classList.add('errorPPC');
+                                        e.target.querySelectorAll('td')[1].innerHTML = 'Не удалось инициализировать полуприцеп'
+                                        setErrorMessage(true)
+                                    })
+
                             }}>
 
                             <td>{e[0]}</td>

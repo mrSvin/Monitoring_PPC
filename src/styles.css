@@ -87,23 +87,51 @@
 .selectedPPC {
     cursor: pointer;
     background: #2c5275;
+    pointer-events: none;
 }
+
+.selectedPPC > td {
+    user-select: text!important;
+}
+
+
+.errorPPC {
+    pointer-events: none!important;
+    background: #ff0000 !important;
+}
+
+.tableNoPointer{
+    cursor: wait!important;
+}
+
+
+.tableNoPointer > tbody > tr{
+    cursor: wait!important;
+    pointer-events: none;
+}
+
 
 .tableBeacon > tbody > tr > td:nth-child(1) {
     white-space: nowrap;
     margin-right: 30px;
     width: 2%;
     text-align: center;
+    pointer-events: none;
+    user-select: none;
 }
 
 .tableBeacon > tbody > tr > td:nth-child(2) {
     width: 70%;
+    pointer-events: none;
+    user-select: none;
 }
 
 .tableBeacon > tbody > tr > td:nth-child(3) {
     width: 20%;
     text-align: end;
     margin-right: 5px;
+    pointer-events: none;
+    user-select: none;
 }
 
 .tableBeacon > tbody {
@@ -123,18 +151,24 @@
     margin-right: 24px;
     width: 20%;
     text-align: end;
+    pointer-events: none;
+    user-select: none;
 }
 
 .tableBeacon > thead > tr > th:nth-child(2) {
     width: 70%;
     margin-left: 10px;
     text-align: start;
+    pointer-events: none;
+    user-select: none;
 }
 
 .tableBeacon > thead > tr > th:nth-child(1) {
     width: 2%;
     text-align: center;
     margin-right: 10px;
+    pointer-events: none;
+    user-select: none;
 }
 
 .divTable {
