@@ -16,7 +16,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                 promise.then(e=>{
                     // записать координаты в массив
                     let array = [e.pos.y, e.pos.x]
-                    let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext]
+                    let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext, e.pos.t]
                     // Переместить карту в эти координаты
                     mapRef.current.panTo(array, {
                         delay: 1000
@@ -35,13 +35,13 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                             console.log('Ошибка повторная загрузка', )
                             let promiseError = fetchRequestObject(localStorage['selectedPPC'])
                             promiseError.then(e=>{
-                                if(!e.pos){
+                                if(!e){
                                     alert('Не удалось загрузить станок')
                                     return 0
                                 }
                                 // записать координаты в массив
                                 let array = [e.pos.y, e.pos.x]
-                                let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext]
+                                let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext, e.pos.t]
                                 // Переместить карту в эти координаты
                                 mapRef.current.panTo(array, {
                                     delay: 1000
@@ -66,7 +66,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                 promise.then(e=>{
                     // записать координаты в массив
                     let array = [e.pos.y, e.pos.x]
-                    let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext]
+                    let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext, e.pos.t]
 
                     // Переместить карту в эти координаты
                     mapRef.current.panTo(array, {
@@ -83,12 +83,13 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                             let promiseError = fetchRequestObject(localStorage['selectedPPC'])
                             promiseError.then(e=>{
                                 // записать координаты в массив
-                                if(!e.pos){
+                                if(!e){
                                     alert('Не удалось загрузить станок')
                                     return 0
                                 }
                                 let array = [e.pos.y, e.pos.x]
-                                let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext]
+                                let message = [e.pos.y, e.pos.x, e.nm, e.lmsg.p.pwr_ext, e.pos.t]
+
                                 // Переместить карту в эти координаты
                                 mapRef.current.panTo(array, {
                                     delay: 1000
@@ -172,7 +173,8 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
 
                                     // записать координаты в массив
                                     let array = [p.pos.y, p.pos.x]
-                                    let message = [p.pos.y, p.pos.x, p.nm, p.lmsg.p.pwr_ext]
+
+                                    let message = [p.pos.y, p.pos.x, p.nm, p.lmsg.p.pwr_ext, p.pos.t]
 
                                     setIdState(idState+1)
                                     setInfo(message)

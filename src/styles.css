@@ -198,11 +198,157 @@
 }
 
 .reportPPC {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     margin: 10px;
-    height: 800px;
-    background: #2c5275;
+    /*background: #2c5275;*/
+    position: relative;
+}
+
+.imgTanger{
+    width: 100%;
+}
+
+.imgWheels{
+    position: absolute;
+    width: 100%;
+    transition: 0.5s;
+    top: 0;
+}
+
+.wheelInfoblock {
+    background: white;
+    height: 15%;
+    width: 10%;
+    border-radius: 20px;
+    position: absolute;
+}
+
+.osInfoBlock {
+    background: red;
+    height: 4%;
+    width: 2%;
+    border-radius: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.wheel1{
+    top: 8%;
+    left: 62%;
+}
+.os1 {
+    top: 43%;
+    right: 22%;
+}
+.wheel2{
+    top: 59%;
+    left: 88%;
+}
+
+.wheel3{
+    top: 17%;
+    left: 50%;
+
+
+}
+.os2 {
+    top: 52%;
+    right: 31%;
+}
+.wheel4{
+    top: 67%;
+    left: 78%;
+}
+
+.wheel5{
+    top: 26%;
+    left: 38%;
+}
+.os3 {
+    top: 62%;
+    right: 41%;
+}
+.wheel6{
+    bottom: 7%;
+    left: 68%;
+}
+
+.wheel7{
+    top: 35%;
+    left: 25%;
+}
+.os4 {
+    top: 70%;
+    right: 50%;
+}
+.wheel8{
+    bottom: 0%;
+    left: 57%;
+}
+
+.battery {
+    position: absolute;
+    width: 8%;
+    height: 22%;
+    top: 0%;
+    left: 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.battery > img{
+    position: absolute;
+    bottom: 25%;
+    width: 100%;
+}
+
+.battery > p{
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    font-weight: 600;
+    position: absolute;
+    font-size: 2em;
+    bottom: 5%;
+    text-shadow: 2px 2px 2px #000000;
+}
+
+.iconStop {
+    position: absolute;
+    width: 7%;
+    top: 3%;
+    left: 21%;
+}
+
+.сompressor {
+    position: absolute;
+    width: 8%;
+    height: 22%;
+    top: 0%;
+    left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.сompressor > img{
+    position: absolute;
+    bottom: 25%;
+    width: 100%;
+}
+
+.сompressor > p{
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    font-weight: 600;
+    position: absolute;
+    font-size: 2em;
+    bottom: 5%;
+    text-shadow: 2px 2px 2px #000000;
 }
 
 .beaconMenuButton {
@@ -237,5 +383,22 @@
     margin: 1px auto;
     height: 2px;
     border-radius: 18%;
+}
+
+.energyIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.energyParagraph{
+    display: inline;
+    position: relative;
+    top: -4px;
+    right: -5px;
+    font-weight: 600;
+}
+
+.ymaps-2-1-79-balloon {
+    top: -130px!important;
 }
 
