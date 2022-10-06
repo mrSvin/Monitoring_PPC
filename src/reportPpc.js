@@ -1,88 +1,54 @@
-import React, {useEffect, useRef, useState} from "react";
-import { createRoot } from 'react-dom/client'
-import {fetchRequestCountData,fetchRequestAllData, userInfo} from './fetchRequest.js'
+import tanker from "./images/tanker.png"
+import wheel from "./images/wheel.png"
 
-import YandexMap from "./yandex-map.js";
-import TablePpc from './tablePpc.js'
-import ReportPpc from './reportPpc.js'
+import os1 from "./images/5.4.png"
+import os2 from "./images/5.3.png"
+import os3 from "./images/5.2.png"
+import os4 from "./images/5.1.png"
 
-import "./styles.css";
+import iconEnergy from "./images/battery.png"
+import iconStop from "./images/stop.png"
+import iconCompressor from "./images/compressor.png"
 
-
-const App = () => {
-
-    const [filterList, setFilterList] = useState([])
-    const [filter, setFilter] = useState('')
-    const mapRef = useRef(null);
-
-    let allDataArray = []
-
-    function getLocalData(){
-        let allDataArray = []
-
-        let local = localStorage['data'].split(',')
-
-        for(let i=0; i<local.length; i+=3){
-            allDataArray.push([local[i],local[i+1], local[i+2]])
-        }
-        return allDataArray
-
-    }
-
-    useEffect(() => {
-        let count = fetchRequestCountData()
-        count.then(e=>{
-            if(localStorage['data'] !== undefined){
-                allDataArray = getLocalData()
-                if(e !== allDataArray.length){
-                    console.log('Обновление данных')
-                    let promise = fetchRequestAllData(allDataArray)
-                    promise.then(e=>{
-                        allDataArray = e
-                        console.log('Новые данные:',allDataArray)
-                        setFilterList(allDataArray)
-                    })
-                } else {
-                    console.log('Локальные данные:',allDataArray)
-                    setFilterList(allDataArray)
-                }
-            }
-            else {
-                console.log('Первая загрузка данных')
-                let promise = fetchRequestAllData(allDataArray)
-                promise.then(e=>{
-                    allDataArray = e
-                    console.log('Данные:',allDataArray)
-                    setFilterList(allDataArray)
-                })
-
-            }
-        })
-    }, [])
-
-
-    const [placemarks, setPlacemarks] = useState([51.651713, 46.036361]);
-    const [info, setInfo] = useState('test info!')
-    const [idState, setIdState] = useState(0)
-
-
+function ReportPpc(){
     return (
-        <div className='main-app'>
-            <div className='pagePpc'>
-                <div className='flex'>
-                    <YandexMap placemarks={placemarks} info={info} mapRef={mapRef} idState={idState}/>
-                    <ReportPpc/>
-                </div>
-                <TablePpc filterList={filterList} setFilterList={setFilterList}
-                          filter={filter} setFilter={setFilter}
-                          setPlacemarks={setPlacemarks}
-                          mapRef={mapRef} idState={idState}
-                          setIdState={setIdState} getLocalData={getLocalData}
-                          setInfo={setInfo}/>
+        <div className='reportPPC'>
+            <img className='imgTanger' src={tanker} alt="no-image"/>
+
+            <div className="battery">
+                <img src={iconEnergy} alt="no-image"/>
+                <p>13V</p>
             </div>
+
+            <div className="сompressor">
+                <img src={iconCompressor} alt="no-image"/>
+                <p>13 бар</p>
+            </div>
+
+            <img className='iconStop' src={iconStop} alt="no-image"/>
+
+            <img className='imgWheels' src={os1} alt="no-image"/>
+            <div className='wheelInfoblock wheel1'><p>Колесо 1</p></div>
+            <div className='osInfoBlock os1'></div>
+            <div className='wheelInfoblock wheel2'><p>Колесо 2</p></div>
+
+            <img className='imgWheels' src={os2} alt="no-image"/>
+            <div className='wheelInfoblock wheel3'><p>Колесо 3</p></div>
+            <div className='osInfoBlock os2'></div>
+            <div className='wheelInfoblock wheel4'><p>Колесо 4</p></div>
+
+            <img className='imgWheels' src={os3} alt="no-image"/>
+            <div className='wheelInfoblock wheel5'><p>Колесо 5</p></div>
+            <div className='osInfoBlock os3'></div>
+            <div className='wheelInfoblock wheel6'><p>Колесо 6</p></div>
+
+            <img className='imgWheels' src={os4} alt="no-image"/>
+            <div className='wheelInfoblock wheel7'><p>Колесо 7</p></div>
+            <div className='osInfoBlock os4'></div>
+            <div className='wheelInfoblock wheel8'><p>Колесо 8</p></div>
+
         </div>
-    );
-};
+    )
+}
 
-
-createRoot(document.getElementById('root')).render(<App/>)
+export default ReportPpc;
