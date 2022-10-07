@@ -23,7 +23,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                     });
 
                     // Установить координаты точки и обновить ключ
-                    setInfo(message)
+                    setInfo(e)
                     setPlacemarks(array)
                     setIdState(idState+1)
 
@@ -48,7 +48,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                                 });
 
                                 // Установить координаты точки и обновить ключ
-                                setInfo(message)
+                                setInfo(e)
                                 setPlacemarks(array)
                                 setIdState(idState+1)
 
@@ -73,7 +73,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                         delay: 1000
                     });
 
-                    setInfo(message)
+                    setInfo(e)
                     setPlacemarks(array)
                     setIdState(idState+1)
                 })
@@ -96,7 +96,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                                 });
 
                                 // Установить координаты точки и обновить ключ
-                                setInfo(message)
+                                setInfo(e)
                                 setPlacemarks(array)
                                 setIdState(idState+1)
 
@@ -177,7 +177,7 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                                     let message = [p.pos.y, p.pos.x, p.nm, p.lmsg.p.pwr_ext, p.pos.t]
 
                                     setIdState(idState+1)
-                                    setInfo(message)
+                                    setInfo(p)
                                     setPlacemarks(array)
 
                                     // Переместить карту в эти координаты

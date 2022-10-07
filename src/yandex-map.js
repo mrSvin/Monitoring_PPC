@@ -73,10 +73,10 @@ const YandexMap = ({placemarks, info, mapRef, idState}) => {
                             key={idState}
                             geometry={placemarks}
                             properties={{
-                                balloonContentBody: `<b>${info[2]}</b><br>
-                                                         <img src=${iconMap} class="energyIcon"><p class="energyParagraph">${!isNaN(info[1])?(info[1].toFixed(2)):info[1]} - ${!isNaN(info[0])?(info[0].toFixed(2)):info[0]}</p><br>
-                                                         <img src=${iconEnergy} class="energyIcon"><p class="energyParagraph">${info[3]}V</p><br>
-                                                         <img src=${iconTime} class="energyIcon"><p class="energyParagraph">${msToTimeDays(new Date().getTime()-info[4]*1000)}</p>`
+                                balloonContentBody: `<b>${info.nm}</b><br>
+                                                         <img src=${iconMap} class="energyIcon"><p class="energyParagraph">${!isNaN(info.pos.x)?(info.pos.x.toFixed(2)):info.pos.x} - ${!isNaN(info.pos.y)?(info.pos.y.toFixed(2)):info.pos.y}</p><br>
+                                                         <img src=${iconEnergy} class="energyIcon"><p class="energyParagraph">${info.lmsg.p.pwr_ext}V</p><br>
+                                                         <img src=${iconTime} class="energyIcon"><p class="energyParagraph">${msToTimeDays(new Date().getTime()-info.pos.t*1000)}</p>`
                             }}
                             options={{
                                 iconLayout: "default#image",

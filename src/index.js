@@ -13,6 +13,7 @@ const App = () => {
 
     const [filterList, setFilterList] = useState([])
     const [filter, setFilter] = useState('')
+    const [dataPpc, setDataPpc] = useState(null)
     const mapRef = useRef(null);
 
     let allDataArray = []
@@ -62,7 +63,19 @@ const App = () => {
 
 
     const [placemarks, setPlacemarks] = useState([51.651713, 46.036361]);
-    const [info, setInfo] = useState('test info!')
+    const [info, setInfo] = useState({
+        undef:true,
+        nm:0,
+        lmsg:{
+            p:{pwr_ext:0}
+        },
+        pos:{
+            x:0,
+            y:0,
+            pos:{t:0}
+        },
+    })
+
     const [idState, setIdState] = useState(0)
 
 
@@ -71,7 +84,7 @@ const App = () => {
             <div className='pagePpc'>
                 <div className='flex'>
                     <YandexMap placemarks={placemarks} info={info} mapRef={mapRef} idState={idState}/>
-                    <ReportPpc/>
+                    <ReportPpc info={info} setInfo={setInfo}/>
                 </div>
                 <TablePpc filterList={filterList} setFilterList={setFilterList}
                           filter={filter} setFilter={setFilter}

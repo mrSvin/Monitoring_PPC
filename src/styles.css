@@ -217,26 +217,58 @@
     top: 0;
 }
 
+.up{
+    top: -50px;
+}
+
+.upOs{
+    transition: 0.5s;
+    transform: translate(0px, -235%);
+}
+
 .wheelInfoblock {
-    background: white;
-    height: 15%;
+    /*background: white;*/
+    height: 5%;
     width: 10%;
     border-radius: 20px;
     position: absolute;
 }
 
+.wheelInfoblock > p{
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    font-weight: 600;
+    position: absolute;
+    font-size: 2em;
+    bottom: 5%;
+    text-shadow: 2px 2px 2px #000000;
+}
+
 .osInfoBlock {
-    background: red;
+    /*background: red;*/
     height: 4%;
     width: 2%;
-    border-radius: 100%;
+    /*border-radius: 100%;*/
     position: absolute;
     z-index: 1;
+    transition: 0.5s;
+}
+
+.osInfoBlock > p{
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    font-weight: 600;
+    position: absolute;
+    font-size: 2em;
+    bottom: 5%;
+    text-shadow: 2px 2px 2px #000000;
 }
 
 .wheel1{
-    top: 8%;
-    left: 62%;
+    top: 20%;
+    left: 67%;
 }
 .os1 {
     top: 43%;
@@ -248,10 +280,8 @@
 }
 
 .wheel3{
-    top: 17%;
-    left: 50%;
-
-
+    top: 27%;
+    left: 57%;
 }
 .os2 {
     top: 52%;
@@ -263,28 +293,28 @@
 }
 
 .wheel5{
-    top: 26%;
-    left: 38%;
+    top: 34%;
+    left: 46%;
 }
 .os3 {
     top: 62%;
     right: 41%;
 }
 .wheel6{
-    bottom: 7%;
-    left: 68%;
+    bottom: 17%;
+    left: 66%;
 }
 
 .wheel7{
-    top: 35%;
-    left: 25%;
+    top: 41%;
+    left: 36%;
 }
 .os4 {
     top: 70%;
     right: 50%;
 }
 .wheel8{
-    bottom: 0%;
+    bottom: 13%;
     left: 57%;
 }
 
@@ -316,11 +346,39 @@
     text-shadow: 2px 2px 2px #000000;
 }
 
+.speed {
+    position: absolute;
+    width: 8%;
+    height: 22%;
+    top: 0%;
+    left: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.speed > img{
+    position: absolute;
+    bottom: 25%;
+    width: 100%;
+}
+
+.speed > p{
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    font-weight: 600;
+    position: absolute;
+    font-size: 2em;
+    bottom: 5%;
+    text-shadow: 2px 2px 2px #000000;
+}
+
 .iconStop {
     position: absolute;
     width: 7%;
     top: 3%;
-    left: 21%;
+    left: 31%;
 }
 
 .сompressor {
