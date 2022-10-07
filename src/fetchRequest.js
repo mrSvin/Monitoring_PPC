@@ -38,7 +38,6 @@ export function fetchRequestHistory(id, timeBefore, timeAfter) {
     return fetch(`http://${serverDomain}:8088/api/reportWabco/id:${id}from:${timeBefore}to:${timeAfter}`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
             return data
         })
 }

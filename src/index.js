@@ -7,6 +7,7 @@ import TablePpc from './tablePpc.js'
 import ReportPpc from './reportPpc.js'
 
 import "./styles.css";
+import History from "./history";
 
 
 const App = () => {
@@ -84,7 +85,8 @@ const App = () => {
             <div className='pagePpc'>
                 <div className='flex'>
                     <YandexMap placemarks={placemarks} info={info} mapRef={mapRef} idState={idState}/>
-                    <ReportPpc info={info} setInfo={setInfo}/>
+                    {/*<ReportPpc info={info}/>*/}
+                    <History info={info}/>
                 </div>
                 <TablePpc filterList={filterList} setFilterList={setFilterList}
                           filter={filter} setFilter={setFilter}
