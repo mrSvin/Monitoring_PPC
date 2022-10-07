@@ -1,5 +1,9 @@
-import {fetchRequestAllData, fetchRequestCountData, fetchRequestHistory} from './fetchRequest.js'
+import {fetchRequestHistory} from './fetchRequest.js'
 import React, {useState, useEffect} from "react";
+
+import * as Highcharts from 'highcharts';
+require("highcharts/modules/exporting")(Highcharts);
+
 
 function dayYesterday(startTime) {
     return new Date((new Date(startTime)).getTime() - 86400000).getTime()
@@ -9,70 +13,70 @@ function convertTime(time){
     return +(new Date(time).getTime()/1000).toFixed()
 }
 
-// function Highchart(container='containerVoltage', data){
-//
-//     if (data == null){
-//         return 0
-//     }
-//
-//     Highcharts.chart(container, {
-//         chart: {
-//             zoomType: 'x'
-//         },
-//         time: {
-//             timezoneOffset: new Date().getTimezoneOffset()
-//         },
-//         title: {
-//             text: 'Напряжение'
-//         },
-//         xAxis: {
-//             type: 'datetime'
-//         },
-//         yAxis: {
-//             title: {
-//                 text: 'Напряжение'
-//             }
-//         },
-//         legend: {
-//             reversed: true
-//         },
-//         plotOptions: {
-//             area: {
-//                 fillColor: {
-//                     linearGradient: {
-//                         x1: 0,
-//                         y1: 0,
-//                         x2: 0,
-//                         y2: 1
-//                     },
-//                     stops: [
-//                         [0, Highcharts.getOptions().colors[0]],
-//                         [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-//                     ]
-//                 },
-//                 marker: {
-//                     radius: 2
-//                 },
-//                 lineWidth: 1,
-//                 states: {
-//                     hover: {
-//                         lineWidth: 1
-//                     }
-//                 },
-//                 threshold: null
-//             }
-//         },
-//         credits: {
-//             enabled: false
-//         },
-//
-//         series: [{
-//             type: 'area',
-//             name: 'Напряжение',
-//             data: data
-//         },]
-//     });
-// }
+function Highchart(container, data, typeName){
+
+    if (data == null){
+        return 0
+    }
+
+    Highcharts.chart(container, {
+        chart: {
+            zoomType: 'x'
+        },
+        time: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        },
+        title: {
+            text: typeName
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: typeName
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [{
+            type: 'area',
+            name: typeName,
+            data: data
+        },]
+    });
+}
 
 function History({info}){
 
@@ -80,7 +84,7 @@ function History({info}){
 
     useEffect(() => {
         if(localStorage['selectedPPC'] !== undefined){
-            let promise = fetchRequestHistory(localStorage['selectedPPC'], convertTime(dayYesterday(new Date)), convertTime(new Date))
+            let promise = fetchRequestHistory(localStorage['selectedPPC'], convertTime('2022-09-23 12:00:00'), convertTime('2022-09-23 23:59:00'))
             promise.then(data=>{
 
                 if(data.voltage!==null){
@@ -95,10 +99,18 @@ function History({info}){
                     data.pressuareSystem = JSON.parse(data.pressuareSystem)
                     data.possitions = JSON.parse(data.possitions)
 
+                    data.pressuareSystem = data.pressuareSystem.x.map((e,i)=>{
+                        return [e*1000, data.pressuareSystem.y[i]]
+                    })
+                    console.log('Парс общего давления для графика', data.pressuareSystem)
+
+                    Highchart('containerPressuareSystem', data.pressuareSystem, 'Давление')
+
                     data.voltage = data.voltage.x.map((e,i)=>{
                         return [e*1000, data.voltage.y[i]]
                     })
                     console.log('Парс напряжения для графика', data.voltage)
+                    Highchart('containerVoltage', data.voltage, 'Напряжение')
                 }
 
 
@@ -152,12 +164,26 @@ function HistoryData({info,setHistoryState, historyState}) {
                     data.possitions = JSON.parse(data.possitions)
 
 
+                    // data.pressuareWheels = data.pressuareWheels.x.map((e,i)=>{
+                    //     return [e*1000, data.pressuareWheels.y[i]]
+                    // })
+                    console.log('Парс давления в колесах для графика(Не сделан)', data.pressuareSystem)
+
+                    data.pressuareSystem = data.pressuareSystem.x.map((e,i)=>{
+                        return [e*1000, data.pressuareSystem.y[i]]
+                    })
+                    console.log('Парс общего давления для графика', data.pressuareSystem)
+
+                    Highchart('containerPressuareSystem', data.pressuareSystem, 'Давление')
 
                     data.voltage = data.voltage.x.map((e,i)=>{
                         return [e*1000, data.voltage.y[i]]
                     })
                     console.log('Парс напряжения для графика', data.voltage)
+
+                    Highchart('containerVoltage', data.voltage, 'Напряжение')
                 }
+
 
 
 
@@ -204,6 +230,7 @@ function HistoryData({info,setHistoryState, historyState}) {
             {/*</div>:null}*/}
 
             <div id='containerVoltage'></div>
+            <div id='containerPressuareSystem'></div>
 
             {/*{Object.keys(historyState).map((e,i)=>{*/}
             {/*    // console.log(historyState[e])*/}

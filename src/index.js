@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import { createRoot } from 'react-dom/client'
-import {fetchRequestCountData,fetchRequestAllData, userInfo} from './fetchRequest.js'
+import {fetchRequestCountData, fetchRequestAllData, userInfo, fetchRequestHistory} from './fetchRequest.js'
 
 import YandexMap from "./yandex-map.js";
 import TablePpc from './tablePpc.js'
