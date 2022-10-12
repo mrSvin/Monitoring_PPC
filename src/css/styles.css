@@ -111,65 +111,10 @@
 }
 
 
-.tableBeacon > tbody > tr > td:nth-child(1) {
-    white-space: nowrap;
-    margin-right: 30px;
-    width: 2%;
-    text-align: center;
-    pointer-events: none;
-    user-select: none;
-}
 
-.tableBeacon > tbody > tr > td:nth-child(2) {
-    width: 70%;
-    pointer-events: none;
-    user-select: none;
-}
 
-.tableBeacon > tbody > tr > td:nth-child(3) {
-    width: 20%;
-    text-align: end;
-    margin-right: 5px;
-    pointer-events: none;
-    user-select: none;
-}
 
-.tableBeacon > tbody {
-    overflow-x: hidden;
-    display: block;
-    width: 100%;
-    max-height: 82vh;
-}
 
-.tableBeacon > thead > tr {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px;
-}
-
-.tableBeacon > thead > tr > th:nth-child(3) {
-    margin-right: 24px;
-    width: 20%;
-    text-align: end;
-    pointer-events: none;
-    user-select: none;
-}
-
-.tableBeacon > thead > tr > th:nth-child(2) {
-    width: 70%;
-    margin-left: 10px;
-    text-align: start;
-    pointer-events: none;
-    user-select: none;
-}
-
-.tableBeacon > thead > tr > th:nth-child(1) {
-    width: 2%;
-    text-align: center;
-    margin-right: 10px;
-    pointer-events: none;
-    user-select: none;
-}
 
 .divTable {
     width: 27%;
@@ -458,5 +403,37 @@
 
 .ymaps-2-1-79-balloon {
     top: -130px!important;
+}
+
+.menuButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    margin: 0 0 4px 0;
+    margin-top: 0px;
+    padding-left: 0;
+}
+
+.menuNoSelect {
+    color: #f2f6f8;
+    text-shadow: none;
+    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.menuSelect {
+    color: #e51a83 ;
+    text-shadow: none;
+    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.menuNoSelect:hover {
+    color: #3556f6;
+    transition: 0.5s;
 }
 

@@ -1,30 +1,36 @@
+import {serverDomain} from "./vars"
+
 export function fetchRequestAllData() {
-    let serverDomain = window.location.hostname
-    serverDomain = '192.168.3.41'
+
     return fetch(`http://${serverDomain}:8088/api/infoData`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
-            console.log('Запрос данных')
             let local = []
             let allDataArray = []
 
             data.forEach(e=>{
+                local.push(e.cnm)
+                local.push(e.nm)
                 local.push(e.id)
-                local.push(e.name)
-                local.push(e.wialon_id)
+                if (e.pos != null) {
+                    local.push(e.pos.t)
+                } else {
+                    local.push(0)
+                }
+
+
             })
             localStorage['data'] = local
 
-            for(let i=0; i<local.length; i+=3){
-                allDataArray.push([local[i],local[i+1], local[i+2]])
+            for(let i=0; i<local.length; i+=4){
+                allDataArray.push([local[i],local[i+1], local[i+2], local[i+3]])
             }
             return allDataArray
         })
 }
 
 export function fetchRequestCountData() {
-    let serverDomain = window.location.hostname
-    serverDomain = '192.168.3.41'
+
     return fetch(`http://${serverDomain}:8088/api/countData`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
@@ -33,8 +39,7 @@ export function fetchRequestCountData() {
 }
 
 export function fetchRequestHistory(id, timeBefore, timeAfter) {
-    let serverDomain = window.location.hostname
-    serverDomain = '192.168.3.41'
+
     return fetch(`http://${serverDomain}:8088/api/reportWabco/id:${id}from:${timeBefore}to:${timeAfter}`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
@@ -43,8 +48,7 @@ export function fetchRequestHistory(id, timeBefore, timeAfter) {
 }
 
 export function fetchRequestObject(id) {
-    let serverDomain = window.location.hostname
-    serverDomain = '192.168.3.41'
+
     return fetch(`http://${serverDomain}:8088/api/infoObject/id:${id}`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
@@ -56,8 +60,7 @@ export function fetchRequestObject(id) {
 }
 
 export function userInfo() {
-    let serverDomain = window.location.hostname
-    serverDomain = '192.168.3.41'
+
     return fetch(`http://${serverDomain}:8080/auth/userInfo`, {
         method: 'POST'
     })

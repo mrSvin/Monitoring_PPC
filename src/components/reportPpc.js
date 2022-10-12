@@ -1,16 +1,16 @@
-import tanker from "./images/tanker.png"
-import wheel from "./images/wheel.png"
+import tanker from "../images/tanker.png"
+import wheel from "../images/wheel.png"
 
-import os1 from "./images/5.4.png"
-import os2 from "./images/5.3.png"
-import os3 from "./images/5.2.png"
-import os4 from "./images/5.1.png"
+import os1 from "../images/5.4.png"
+import os2 from "../images/5.3.png"
+import os3 from "../images/5.2.png"
+import os4 from "../images/5.1.png"
 
-import iconEnergy from "./images/battery.png"
-import iconStop from "./images/stop.png"
-import iconCompressor from "./images/compressor.png"
+import iconEnergy from "../images/battery.png"
+import iconStop from "../images/stop.png"
+import iconCompressor from "../images/compressor.png"
 
-import iconSpeed from "./images/speed.png"
+import iconSpeed from "../images/speed.png"
 
 
 function ReportPpc({info}){

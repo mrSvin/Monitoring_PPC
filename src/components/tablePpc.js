@@ -1,5 +1,6 @@
-import {fetchRequestObject} from './fetchRequest.js'
+import {fetchRequestObject} from '../js/fetchRequest.js'
 import {useEffect, useState} from "react";
+import "../css/tablePpc.css";
 
 function TablePpc({filterList, setFilterList, filter, setFilter,
                       setPlacemarks, mapRef,idState, setIdState,
@@ -7,6 +8,8 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
 
     const [tableClicked, setTableClicked] = useState(true)
     const [errorMessage, setErrorMessage] = useState(false)
+
+    let timeNow = Math.floor(Date.now()/ 1000);
 
     useEffect(() => {
 
@@ -142,26 +145,23 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
             <table className={tableClicked? "tableBeacon": "tableBeacon tableNoPointer"}>
                 <thead>
                 <tr>
-                    <th>№</th>
                     <th>Имя полуприцепа</th>
-                    <th>ID</th>
+                    <th>Пробег</th>
+                    <th>Связь</th>
                 </tr>
                 </thead>
                 <tbody>
                 {filterList.map((e,i)=>{
+
                     return (
                         <tr
                             className={localStorage['selectedPPC']==filterList[i][2]? 'selectedPPC':null}
                             key={i}
                             onClick={(e)=>{
-                                // let table = document.querySelector('.tableBeacon')
 
                                 setTableClicked(false)
-                                // e.target.classList.add('loadingPPC');
-                                // e.target.classList.add('tableNoPointer');
 
                                 setTimeout(()=>{
-                                    // e.target.classList.remove('loadingPPC');
                                     setTableClicked(true)
                                 }, 1000)
 
@@ -185,8 +185,6 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
                                         delay: 1000
                                     });
 
-
-
                                     if(e.target.querySelectorAll('td')[1].innerHTML == 'Не удалось инициализировать полуприцеп'){
                                         e.target.querySelectorAll('td')[1].innerHTML = p.nm
                                     }
@@ -200,9 +198,9 @@ function TablePpc({filterList, setFilterList, filter, setFilter,
 
                             }}>
 
-                            <td>{e[0]}</td>
                             <td>{e[1]}</td>
-                            <td>{e[2]}</td>
+                            <td>{e[0]}</td>
+                            <td> {timeNow-e[3]>3600 ? <span className="statusNoActive"></span> : <span className="statusActive"></span>}</td>
                         </tr>
                     )})
                 }

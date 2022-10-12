@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
 import {YMaps, Map, Clusterer, Placemark} from "react-yandex-maps";
-import iconPpc from "./images/ppc.png"
-import iconEnergy from "./images/energy.png"
-import iconMap from "./images/map.png"
-import iconTime from "./images/time.png"
+import iconPpc from "../images/ppc.png"
+import iconEnergy from "../images/energy.png"
+import iconMap from "../images/map.png"
+import iconTime from "../images/time.png"
 
 
 const YandexMap = ({placemarks, info, mapRef, idState}) => {
