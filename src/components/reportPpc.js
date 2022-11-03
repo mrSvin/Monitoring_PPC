@@ -31,19 +31,6 @@ export default ReportPpc;
 
 function PpcData({info}){
 
-    console.log('Напряжение', info.lmsg.p.pwr_ext)
-    console.log('Давление в пневмосистеме', info.lmsg.p.can_r6)
-    console.log('Тормоз', (info.lmsg.p.can_r1 == '220')? 'нажат': 'отпущен')
-    console.log('Подъемная ось', (info.lmsg.p.can_r2 == '252')? 'опущена': 'поднята', info.lmsg.p.can_r2)
-
-    console.log('Скорость', info.pos.s)
-
-    console.log('Нагрузка на оси', info.lmsg.p.user_d0, info.lmsg.p.user_d1, info.lmsg.p.user_d2, info.lmsg.p.user_d3)
-    console.log('Давление в колесах',
-        info.lmsg.p.can32bitr6, info.lmsg.p.can32bitr7, info.lmsg.p.can32bitr12, info.lmsg.p.can32bitr13,
-        info.lmsg.p.user_d4, info.lmsg.p.user_d5, info.lmsg.p.user_d6, info.lmsg.p.user_d7)
-    console.log('////////////////')
-
     let wheels = [info.lmsg.p.can32bitr6, info.lmsg.p.can32bitr7, info.lmsg.p.can32bitr12, info.lmsg.p.can32bitr13,
         info.lmsg.p.user_d4, info.lmsg.p.user_d5, info.lmsg.p.user_d6, info.lmsg.p.user_d7]
     wheels = wheels.sort((a,b)=>b-a).filter((e => e != 0))
@@ -53,18 +40,19 @@ function PpcData({info}){
 
     let osImg = [os1,os2,os3,os4]
 
-    console.log('Сортировочка', osi, wheels)
+    let voltage = info.lmsg.p.pwr_ext.toFixed(1);
+    let pressuareSystem = info.lmsg.p.can_r6/10;
 
     return (
         <div>
             <div className="battery">
                 <img src={iconEnergy} alt="no-image"/>
-                <p>{info.lmsg.p.pwr_ext}V</p>
+                <p>{voltage}V</p>
             </div>
 
             <div className="сompressor">
                 <img src={iconCompressor} alt="no-image"/>
-                <p>{info.lmsg.p.can_r6} Б</p>
+                <p>{pressuareSystem} bar</p>
             </div>
 
             <div className="speed">
@@ -86,11 +74,11 @@ function PpcData({info}){
                 return (
                     <div key={i}>
                         <img className={`imgWheels ${up}`} src={osImg[i]} alt="no-image"/>
-                        <div className={`wheelInfoblock wheel${i*2+1}`}><p>{wheels[i*2]} Б</p></div>
+                        <div className={`wheelInfoblock wheel${i*2+1}`}><p>{wheels[i*2]/10} bar</p></div>
                         <div className={`osInfoBlock os${i+1} ${upOs}`}>
                             <p>{e}</p>
                         </div>
-                        <div className={`wheelInfoblock wheel${i*2+2}`}><p>{wheels[i*2+1]} Б</p></div>
+                        <div className={`wheelInfoblock wheel${i*2+2}`}><p>{wheels[i*2+1]/10} bar</p></div>
                     </div>
                 )
             })}

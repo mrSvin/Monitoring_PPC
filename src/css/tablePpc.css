@@ -16,29 +16,57 @@
     border-radius: 50%;
 }
 
-.tableBeacon > tbody > tr > td:nth-child(1) {
-    white-space: nowrap;
-    margin-right: 30px;
-    width: 70%;
+.tableBeacon {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+    margin: 2% 0;
+    word-break: break-word;
+}
+
+.tableBeacon > tbody > tr {
+    padding: 4px;
+    line-height: 1.42857143;
     text-align: left;
-    pointer-events: none;
-    user-select: none;
+    border-bottom: 1px solid #979595;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.tableBeacon > tbody > tr > td:nth-child(2) {
-    width: 20%;
-    text-align: center;
-    margin-right: 5px;
-    pointer-events: none;
-    user-select: none;
+.tableBeacon > thead {
+    border-bottom: 1px solid #979595;
+    text-align: left;
+    display: block;
 }
 
-.tableBeacon > tbody > tr > td:nth-child(3) {
-    width: 12%;
+.tableBeacon > thead > tr > th {
+    color: #83addd;
     text-align: center;
-    margin-right: 5px;
-    pointer-events: none;
-    user-select: none;
+    margin: 0;
+
+}
+
+.tableBeacon > tbody > tr {
+    padding: 4px;
+    line-height: 1.42857143;
+    text-align: left;
+    border-bottom: 1px solid #979595;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tableBeacon > tbody > tr:hover {
+    cursor: pointer;
+    background: #2c5275;
 }
 
 .tableBeacon > tbody {
@@ -54,26 +82,50 @@
     padding: 4px;
 }
 
+.tableBeacon > tbody > tr > td:nth-child(1) {
+    white-space: nowrap;
+    width: 70%;
+    text-align: left;
+    pointer-events: none;
+    user-select: none;
+}
+
+.tableBeacon > tbody > tr > td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+    margin-right: 5px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.tableBeacon > tbody > tr > td:nth-child(3) {
+
+    text-align: center;
+    margin-right: 20px;
+    pointer-events: none;
+    user-select: none;
+}
 
 .tableBeacon > thead > tr > th:nth-child(1) {
-    width: 70%;
-    text-align: center;
-    margin-right: 10px;
+    white-space: nowrap;
+
+    text-align: left;
     pointer-events: none;
     user-select: none;
 }
 
 .tableBeacon > thead > tr > th:nth-child(2) {
-    width: 20%;
-    margin-left: 10px;
+
+
     text-align: right;
     pointer-events: none;
     user-select: none;
+    margin-left: 220px;
 }
 
 .tableBeacon > thead > tr > th:nth-child(3) {
-    width: 12%;
-    margin-left: 10px;
+
+    margin-right: 20px;
     text-align: right;
     pointer-events: none;
     user-select: none;
